@@ -1,0 +1,20 @@
+[
+  {
+    "question": "Which planet in our solar system has the most confirmed moons?",
+    "answer": "Saturn",
+    "category": "Science",
+    "hint": "It is famous for its bright, prominent ring system."
+  },
+  {
+    "question": "How many days are in a leap year?",
+    "answer": "366",
+    "category": "Math",
+    "hint": "It has one extra day added to February."
+  },
+  {
+    "question": "What planet do we live on?",
+    "answer": "Earth",
+    "category": "Geography",
+    "hint": "It is the third planet from the Sun."
+  }
+]
