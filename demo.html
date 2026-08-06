@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizphoria | Interactive Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">✨ Quizphoria!</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="demo.html" class="active">Interactive Demo</a></li>
+      <li><a href="docs.html">Documentation</a></li>
+      <li><a href="https://github.com/atienosharzy-boop/quizphoria" target="_blank" class="btn-nav">GitHub Repo</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1>🎮 Interactive Quiz Demo</h1>
+      <p>Test your knowledge live in the browser!</p>
+    </div>
+
+    <div class="quiz-wrapper">
+      <div id="quiz-active">
+        <div class="quiz-top">
+          <span id="q-num" class="pill">Question 1 of 3</span>
+          <span id="score-num" class="pill" style="color: var(--primary-pink);">Score: 0 ⭐</span>
+        </div>
+        <h2 id="q-text" class="question-text">Loading question...</h2>
+        <div id="options-grid" class="options-list"></div>
+        <button id="next-btn" class="btn btn-pink" style="display: none; margin-top: 2rem; width: 100%;">Next Question ➔</button>
+      </div>
+
+      <div id="quiz-end" style="display: none; text-align: center;">
+        <div style="font-size: 4rem;">🏆</div>
+        <h2 style="font-family: 'Fredoka'; margin: 1rem 0;">Fantastic Effort!</h2>
+        <p id="final-score" style="font-size: 1.4rem; color: var(--text-muted); margin-bottom: 2rem;"></p>
+        <button onclick="resetQuiz()" class="btn btn-yellow">Play Again 🔄</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

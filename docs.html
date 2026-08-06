@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizphoria | Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">✨ Quizphoria!</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="demo.html">Interactive Demo</a></li>
+      <li><a href="docs.html" class="active">Documentation</a></li>
+      <li><a href="demo.html" class="btn-nav">Start Playing 🚀</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1>📖 Developer Setup & Architecture</h1>
+      <p>Learn how Quizphoria is structured using Go and JSON data files.</p>
+    </div>
+
+    <div class="quiz-wrapper" style="max-width: 900px; text-align: left;">
+      <h2 style="font-family: 'Fredoka'; color: var(--primary-purple); margin-bottom: 1rem;">1. Running the Go Backend</h2>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">To run the native Quizphoria engine on your terminal, ensure Go is installed and execute:</p>
+      <pre style="background: #1e293b; color: #38bdf8; padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem; font-size: 1.05rem;">go run main.go</pre>
+
+      <h2 style="font-family: 'Fredoka'; color: var(--primary-purple); margin-bottom: 1rem;">2. JSON Data Structure</h2>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">Questions are dynamically populated using standard JSON format inside <code>questions.json</code>:</p>
+      <pre style="background: #1e293b; color: #a7f3d0; padding: 1.2rem; border-radius: 12px; font-size: 0.95rem;">[
+  {
+    "question": "What is the primary keyword used to declare a package in Go?",
+    "options": ["module", "package", "import", "main"],
+    "answer": 1
+  }
+]</pre>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
+  </footer>
+
+</body>
+</html>
