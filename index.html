@@ -2,275 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quizphoria Learning Hub</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      color: #2d3748;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
-      padding: 30px;
-      max-width: 520px;
-      width: 90%;
-      box-sizing: border-box;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    .category-badge {
-      background: #ebf8ff;
-      color: #3182ce;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 20px;
-      text-transform: uppercase;
-    }
-    .timer-badge {
-      background: #fff5f5;
-      color: #e53e3e;
-      font-size: 14px;
-      font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #feb2b2;
-    }
-    .progress-bar {
-      height: 8px;
-      background: #edf2f7;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4299e1, #667eea);
-      transition: width 0.3s;
-    }
-    .input-box {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 16px;
-      box-sizing: border-box;
-      margin: 15px 0;
-      outline: none;
-    }
-    .input-box:focus { border-color: #667eea; }
-    .hint-box {
-      background: #f7fafc;
-      border-left: 4px solid #ecc94b;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 13.5px;
-      color: #744210;
-      margin-bottom: 15px;
-    }
-    .btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
-    }
-    .prize-badge {
-      background: linear-gradient(135deg, #ffed4a 0%, #ffb100 100%);
-      color: #744210;
-      font-weight: bold;
-      padding: 12px;
-      border-radius: 50px;
-      text-align: center;
-      margin: 15px 0;
-    }
-    .result-item {
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-    .correct-item { background: #f0fff4; border: 1px solid #c6f6d5; }
-    .wrong-item { background: #fff5f5; border: 1px solid #fed7d7; }
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 2px solid #e2e8f0;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizphoria Learning Hub | Go-Powered Quiz Engine</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="card" id="app"></div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">&lt;Quizphoria /&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#demo">Interactive Demo</a></li>
+      <li><a href="#docs">Documentation</a></li>
+      <li><a href="https://github.com/atienosharzy-boop/quizphoria" target="_blank" class="btn-sm">GitHub Repo</a></li>
+    </ul>
+  </nav>
 
-  <script>
-    let questions = [];
-    let currentIndex = 0;
-    let userAnswers = [];
-    let selectedCategory = 'All';
-    let playerName = '';
-    let timerInterval = null;
-    let timeLeft = 10;
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge">Go Backend & Static Frontend</span>
+      <h1>Master Skills with <span class="highlight">Quizphoria</span></h1>
+      <p>An interactive quiz application designed to test knowledge, track scores in real time, and deliver rapid feedback.</p>
+      <div class="hero-btns">
+        <a href="#demo" class="btn btn-primary">Try Interactive Demo</a>
+        <a href="#docs" class="btn btn-outline">View Setup Guide</a>
+      </div>
+    </div>
+  </header>
 
-    function renderStart() {
-      document.getElementById('app').innerHTML = `
-        <h1 style="text-align: center; color: #667eea; margin-top:0;">🎉 QUIZPHORIA 🎉</h1>
-        <p style="text-align: center; color: #718096;">Interactive Knowledge Hub</p>
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <h2 class="section-title">Key Features</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Fast Execution</h3>
+        <p>Built with lightweight architecture for instant question loading and evaluation.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Real-Time Scoring</h3>
+        <p>Tracks your correct responses on the fly and provides instant accurate feedback.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛠️</div>
+        <h3>Modular Design</h3>
+        <p>Clean code structure separating backend data parsing logic from user presentation.</p>
+      </div>
+    </div>
+  </section>
 
-        <label><b>Enter Your Name:</b></label>
-        <input type="text" id="pName" class="input-box" placeholder="e.g. Jordan" value="${playerName}">
-
-        <label><b>Select Category:</b></label>
-        <select id="catSelect">
-          <option value="All">🌐 All Subjects</option>
-          <option value="Science">🧪 Science</option>
-          <option value="Tech">💻 Tech & Coding</option>
-          <option value="Math">🔢 Math</option>
-        </select>
-
-        <button class="btn" onclick="startQuiz()">Start Learning ➔</button>
-      `;
-    }
-
-    async function startQuiz() {
-      playerName = document.getElementById('pName').value || 'Anonymous Student';
-      selectedCategory = document.getElementById('catSelect').value;
-
-      const res = await fetch(`/api/questions?category=${selectedCategory}`);
-      questions = await res.json();
-
-      if (!questions || questions.length === 0) {
-        alert('No questions found for this category!');
-        return;
-      }
-
-      currentIndex = 0;
-      userAnswers = [];
-      renderQuestion();
-    }
-
-    function renderQuestion() {
-      clearInterval(timerInterval);
-      timeLeft = 10;
-
-      if (currentIndex >= questions.length) {
-        submitQuiz();
-        return;
-      }
-
-      const q = questions[currentIndex];
-      const progressPct = ((currentIndex) / questions.length) * 100;
-
-      document.getElementById('app').innerHTML = `
-        <div class="header">
-          <span class="category-badge">${q.category}</span>
-          <span class="timer-badge" id="timer">⏱️ 00:10</span>
+  <!-- Interactive Demo Section -->
+  <section class="section" id="demo">
+    <h2 class="section-title">Live Demo Sandbox</h2>
+    <div class="quiz-container card">
+      <div id="quiz-box">
+        <div class="quiz-header">
+          <span id="question-number">Question 1 of 3</span>
+          <span id="score-display">Score: 0</span>
         </div>
+        <h3 id="question-text">Loading question...</h3>
+        <div id="options-container" class="options-grid"></div>
+        <button id="next-btn" class="btn btn-primary" style="display: none; margin-top: 1.5rem;">Next Question</button>
+      </div>
+      <div id="result-box" style="display: none; text-align: center;">
+        <h3>Quiz Complete! 🎉</h3>
+        <p id="final-score" style="font-size: 1.5rem; margin: 1rem 0;"></p>
+        <button onclick="restartQuiz()" class="btn btn-primary">Try Again</button>
+      </div>
+    </div>
+  </section>
 
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${progressPct}%"></div>
-        </div>
+  <!-- Footer -->
+  <footer class="footer" id="docs">
+    <p>&copy; 2026 Quizphoria Learning Hub. Developed by Sharleen Atieno.</p>
+  </footer>
 
-        <h3>Question ${currentIndex + 1} of ${questions.length}</h3>
-        <p style="font-size: 16px; line-height: 1.4;">${q.question}</p>
-
-        <input type="text" id="ansInput" class="input-box" placeholder="Type your answer here..." autofocus>
-
-        <div class="hint-box">💡 <b>Hint:</b> ${q.hint}</div>
-
-        <button class="btn" onclick="nextQuestion()">Next Question ➔</button>
-      `;
-
-      document.getElementById('ansInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') nextQuestion();
-      });
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById('timer').innerText = `⏱️ 00:0${timeLeft}`;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          nextQuestion();
-        }
-      }, 1000);
-    }
-
-    function nextQuestion() {
-      clearInterval(timerInterval);
-      const inputEl = document.getElementById('ansInput');
-      const val = inputEl ? inputEl.value : '';
-      userAnswers.push(val);
-      currentIndex++;
-      renderQuestion();
-    }
-
-    async function submitQuiz() {
-      document.getElementById('app').innerHTML = `<h2 style="text-align: center;">Calculating Score...</h2>`;
-
-      const res = await fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          playerName: playerName,
-          answers: userAnswers,
-          category: selectedCategory
-        })
-      });
-
-      const data = await res.json();
-
-      let resultsHTML = '';
-      data.results.forEach((r, idx) => {
-        resultsHTML += `
-          <div class="result-item ${r.isCorrect ? 'correct-item' : 'wrong-item'}">
-            <b>Q${idx + 1}: ${r.question}</b><br>
-            Your answer: <i>${r.userAnswer || '(Timed out)'}</i> | Correct: <b>${r.correct}</b><br>
-            <small>📖 ${r.explanation}</small>
-          </div>
-        `;
-      });
-
-      let leaderboardHTML = '';
-      data.leaderboard.forEach((entry) => {
-        leaderboardHTML += `<li><b>${entry.name}</b> - ${entry.score}/${entry.total} (${entry.date})</li>`;
-      });
-
-      document.getElementById('app').innerHTML = `
-        <h2 style="text-align: center; margin-top:0;">🎯 QUIZ COMPLETE!</h2>
-        <h1 style="text-align: center; color: #38a169; margin: 5px 0;">${data.score} / ${data.total}</h1>
-
-        <div class="prize-badge">${data.prize}</div>
-
-        <h3>Explanations:</h3>
-        <div style="max-height: 180px; overflow-y: auto;">${resultsHTML}</div>
-
-        <h3>🏆 Top Leaderboard:</h3>
-        <ol style="font-size: 14px; padding-left: 20px;">${leaderboardHTML}</ol>
-
-        <button class="btn" onclick="renderStart()">Take Another Quiz</button>
-      `;
-    }
-
-    renderStart();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
