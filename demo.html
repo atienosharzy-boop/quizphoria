@@ -24,8 +24,15 @@
       <h1>🎮 Interactive Quiz Demo</h1>
       <p>Test your knowledge live in the browser!</p>
     </div>
-
     <div class="quiz-wrapper">
+      <div style="display:flex; gap:1rem; align-items:center; margin-bottom:1rem; flex-wrap:wrap;">
+        <label for="category-select" style="font-weight:600;">Choose Subject:</label>
+        <select id="category-select">
+          <option>All</option>
+        </select>
+        <label for="player-name" style="font-weight:600; margin-left:0.5rem;">Your Name:</label>
+        <input id="player-name" placeholder="Enter your name (optional)" style="padding:0.6rem 1rem; border-radius:12px; border:1px solid #e6e6e6;" />
+      </div>
       <div id="quiz-active">
         <div class="quiz-top">
           <span id="q-num" class="pill">Question 1 of 3</span>
@@ -40,7 +47,11 @@
         <div style="font-size: 4rem;">🏆</div>
         <h2 style="font-family: 'Fredoka'; margin: 1rem 0;">Fantastic Effort!</h2>
         <p id="final-score" style="font-size: 1.4rem; color: var(--text-muted); margin-bottom: 2rem;"></p>
-        <button onclick="resetQuiz()" class="btn btn-yellow">Play Again 🔄</button>
+        <div style="margin-bottom:1rem;">
+          <button id="share-score" class="btn btn-purple" style="margin-right:0.8rem;">Share Result</button>
+          <button onclick="resetQuiz()" class="btn btn-yellow">Play Again 🔄</button>
+        </div>
+        <div id="leaderboard" style="margin-top:1.2rem; text-align:left; max-width:480px; margin-left:auto; margin-right:auto;"></div>
       </div>
     </div>
   </div>

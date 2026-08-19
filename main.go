@@ -8,6 +8,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -55,6 +56,10 @@ const (
 	leaderboardFile = "highscores.json"
 )
 
+const maxLeaderboard = 5
+
+var leaderboardMu sync.Mutex
+
 func loadQuestions() ([]Question, error) {
 	fileData, err := os.ReadFile(questionsFile)
 	if err != nil {
@@ -65,18 +70,30 @@ func loadQuestions() ([]Question, error) {
 	return questions, err
 }
 
-func loadLeaderboard() []ScoreEntry {
+func loadLeaderboard() ([]ScoreEntry, error) {
 	fileData, err := os.ReadFile(leaderboardFile)
 	if err != nil {
-		return []ScoreEntry{}
+		if os.IsNotExist(err) {
+			return []ScoreEntry{}, nil
+		}
+		return nil, err
 	}
 	var scores []ScoreEntry
-	_ = json.Unmarshal(fileData, &scores)
-	return scores
+	if err := json.Unmarshal(fileData, &scores); err != nil {
+		return []ScoreEntry{}, nil
+	}
+	return scores, nil
 }
 
-func saveScore(name string, score int, total int) []ScoreEntry {
-	scores := loadLeaderboard()
+func saveScore(name string, score int, total int) ([]ScoreEntry, error) {
+	leaderboardMu.Lock()
+	defer leaderboardMu.Unlock()
+
+	scores, err := loadLeaderboard()
+	if err != nil {
+		scores = []ScoreEntry{}
+	}
+
 	if strings.TrimSpace(name) == "" {
 		name = "Anonymous Student"
 	}
@@ -94,20 +111,40 @@ func saveScore(name string, score int, total int) []ScoreEntry {
 		return scores[i].Score > scores[j].Score
 	})
 
-	if len(scores) > 5 {
-		scores = scores[:5]
+	if len(scores) > maxLeaderboard {
+		scores = scores[:maxLeaderboard]
 	}
 
-	updatedJSON, _ := json.MarshalIndent(scores, "", "  ")
-	_ = os.WriteFile(leaderboardFile, updatedJSON, 0644)
+	updatedJSON, err := json.MarshalIndent(scores, "", "  ")
+	if err == nil {
+		_ = os.WriteFile(leaderboardFile, updatedJSON, 0644)
+	}
 
-	return scores
+	return scores, err
+}
+
+func highscoresHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == http.MethodOptions {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	scores, err := loadLeaderboard()
+	if err != nil {
+		http.Error(w, "Failed to load highscores", http.StatusInternalServerError)
+		return
+	}
+
+	json.NewEncoder(w).Encode(scores)
 }
 
 func questionsHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	questions, err := loadQuestions()
 	if err != nil {
 		http.Error(w, "Failed to load questions", http.StatusInternalServerError)
@@ -195,7 +232,7 @@ func submitHandler(w http.ResponseWriter, r *http.Request) {
 		prize = "🥉 BRONZE MEDAL!"
 	}
 
-	leaderboard := saveScore(req.PlayerName, score, total)
+	leaderboard, _ := saveScore(req.PlayerName, score, total)
 
 	json.NewEncoder(w).Encode(SubmitResponse{
 		Score:       score,
@@ -208,9 +245,25 @@ func submitHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// Serve static files
 	http.Handle("/", http.FileServer(http.Dir(".")))
-	http.HandleFunc("/api/questions", questionsHandler)
-	http.HandleFunc("/api/submit", submitHandler)
+
+	// API routes with basic CORS handling
+	cors := func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusOK)
+				return
+			}
+			next(w, r)
+		}
+	}
+
+	http.HandleFunc("/api/questions", cors(questionsHandler))
+	http.HandleFunc("/api/submit", cors(submitHandler))
+	http.HandleFunc("/api/highscores", cors(highscoresHandler))
 
 	port := ":8080"
 	fmt.Printf("🚀 Quizphoria Learning Hub running at http://localhost%s\n", port)

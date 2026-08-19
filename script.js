@@ -61,50 +61,87 @@ function scrollToSection(id) {
 }
 
 /* --- INTERACTIVE QUIZ LOGIC --- */
-const questions = [
-  {
-    question: "Which device do you use to type words on a computer?",
-    options: ["🖥️ Screen", "⌨️ Keyboard", "🎧 Headphones", "🖱️ Mouse Pad"],
-    answer: 1
-  },
-  {
-    question: "What is a 'Bug' in coding?",
-    options: ["An actual insect", "A mistake in code", "A computer game", "A shiny screen"],
-    answer: 1
-  },
-  {
-    question: "What language helps make websites interactive and exciting?",
-    options: ["CSS", "JavaScript", "HTML", "Python"],
-    answer: 1
-  }
-];
-
+let allQuestions = [];
+let questions = [];
 let currentQIndex = 0;
 let score = 0;
+let userAnswers = [];
 
 const qNumEl = document.getElementById("q-num");
 const scoreNumEl = document.getElementById("score-num");
 const qTextEl = document.getElementById("q-text");
 const optionsGridEl = document.getElementById("options-grid");
 const nextBtn = document.getElementById("next-btn");
-const quizPlayable = document.getElementById("quiz-playable");
-const quizFinished = document.getElementById("quiz-finished");
-const finalScoreText = document.getElementById("final-score-text");
+const quizPlayable = document.getElementById("quiz-playable") || document.getElementById("quiz-active");
+const quizFinished = document.getElementById("quiz-finished") || document.getElementById("quiz-end");
+const finalScoreText = document.getElementById("final-score-text") || document.getElementById("final-score");
+const categorySelect = document.getElementById("category-select");
+
+async function loadQuestionsFile() {
+  try {
+    const res = await fetch('questions.json');
+    const data = await res.json();
+    allQuestions = data;
+  } catch (e) {
+    allQuestions = [];
+    console.error('Failed to load questions.json', e);
+  }
+}
+
+function populateCategorySelect() {
+  if (!categorySelect) return;
+  const cats = new Set(allQuestions.map(q => q.category || 'Uncategorized'));
+  categorySelect.innerHTML = '<option>All</option>' + [...cats].map(c => `<option>${c}</option>`).join('');
+  categorySelect.addEventListener('change', () => {
+    setQuestionsForCategory(categorySelect.value);
+    resetQuiz();
+  });
+}
+
+function setQuestionsForCategory(category) {
+  if (!category || category === 'All') {
+    questions = allQuestions.slice();
+  } else {
+    questions = allQuestions.filter(q => (q.category || '') === category);
+  }
+  // Keep questions manageable in demo (limit to 12)
+  if (questions.length > 12) questions = questions.slice(0, 12);
+}
 
 function loadQuizQuestion() {
+  if (questions.length === 0) {
+    qNumEl.textContent = 'No questions available';
+    qTextEl.textContent = 'Please add questions to questions.json or select a different subject.';
+    optionsGridEl.innerHTML = '';
+    return;
+  }
+
   const q = questions[currentQIndex];
+  // ensure userAnswers length matches
+  if (userAnswers.length < questions.length) {
+    userAnswers = Array(questions.length).fill("");
+  }
   qNumEl.textContent = `Question ${currentQIndex + 1} of ${questions.length}`;
   scoreNumEl.textContent = `Score: ${score} ⭐`;
-  qTextEl.textContent = q.question;
+  qTextEl.textContent = q.question || q.Question || 'Question text missing';
   
   optionsGridEl.innerHTML = "";
   nextBtn.style.display = "none";
 
-  q.options.forEach((opt, idx) => {
+  // Accept options as an array, or build simple multiple choice from answer
+  let opts = q.options;
+  if (!opts || !Array.isArray(opts)) {
+    // Build basic options: correct answer + 3 dummy answers (if available)
+    const correct = q.answer || q.Answer || '';
+    opts = [correct];
+    while (opts.length < 4) opts.push('Option ' + (opts.length + 1));
+  }
+
+  opts.forEach((opt, idx) => {
     const btn = document.createElement("button");
     btn.classList.add("opt-btn");
     btn.textContent = opt;
-    btn.onclick = () => evaluateOption(idx, q.answer);
+    btn.onclick = () => evaluateOption(idx, opts.indexOf(q.answer || q.Answer || opts[0]), opt);
     optionsGridEl.appendChild(btn);
   });
 }
@@ -120,6 +157,11 @@ function evaluateOption(selected, correct) {
     }
   });
 
+  // record the selected answer text
+  const chosenBtn = optionsGridEl.querySelectorAll('.opt-btn')[selected];
+  const chosenText = chosenBtn ? chosenBtn.textContent : '';
+  userAnswers[currentQIndex] = chosenText;
+
   if (selected === correct) {
     score++;
     scoreNumEl.textContent = `Score: ${score} ⭐`;
@@ -128,7 +170,7 @@ function evaluateOption(selected, correct) {
   if (currentQIndex < questions.length - 1) {
     nextBtn.style.display = "inline-block";
   } else {
-    setTimeout(showQuizResults, 1200);
+    setTimeout(showQuizResults, 800);
   }
 }
 
@@ -138,19 +180,87 @@ nextBtn.addEventListener("click", () => {
 });
 
 function showQuizResults() {
-  quizPlayable.style.display = "none";
-  quizFinished.style.display = "block";
-  finalScoreText.textContent = `You earned ${score} out of ${questions.length} Stars! ⭐`;
+  if (quizPlayable) quizPlayable.style.display = "none";
+  if (quizFinished) quizFinished.style.display = "block";
+  if (finalScoreText) finalScoreText.textContent = `You earned ${score} out of ${questions.length} Stars! ⭐`;
+  // submit results to backend and populate leaderboard
+  submitResults();
 }
 
 function resetQuiz() {
   currentQIndex = 0;
   score = 0;
-  quizFinished.style.display = "none";
-  quizPlayable.style.display = "block";
+  userAnswers = [];
+  if (quizFinished) quizFinished.style.display = "none";
+  if (quizPlayable) quizPlayable.style.display = "block";
   loadQuizQuestion();
 }
 
+async function initQuiz() {
+  await loadQuestionsFile();
+  populateCategorySelect();
+  setQuestionsForCategory('All');
+  resetQuiz();
+}
+
+async function submitResults() {
+  const playerName = (document.getElementById('player-name') || {}).value || '';
+  const category = (categorySelect && categorySelect.value) ? categorySelect.value : 'All';
+
+  const payload = {
+    playerName: playerName,
+    answers: userAnswers,
+    category: category
+  };
+
+  // try backend first; fallback to local processing if request fails
+  try {
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      renderLeaderboard(data.Leaderboard || data.leaderboard || []);
+      // show prize if provided
+      if (data.Prize || data.prize) {
+        const prize = data.Prize || data.prize;
+        const finalEl = document.getElementById('final-score');
+        if (finalEl) finalEl.textContent += ` — ${prize}`;
+      }
+      return;
+    }
+  } catch (e) {
+    console.warn('Backend submit failed, falling back to local save', e);
+  }
+
+  // Fallback: build a simple leaderboard from highscores.json if available
+  try {
+    const res2 = await fetch('/api/highscores');
+    if (res2.ok) {
+      const lb = await res2.json();
+      renderLeaderboard(lb);
+      return;
+    }
+  } catch (e) {
+    console.warn('Failed to fetch highscores', e);
+  }
+}
+
+function renderLeaderboard(list) {
+  const container = document.getElementById('leaderboard');
+  if (!container) return;
+  container.innerHTML = '<h3 style="text-align:center;">Top Scores</h3>' +
+    '<ol style="padding-left:1.2rem;">' +
+    list.map(s => `<li style="margin:0.6rem 0;"><strong>${escapeHtml(s.name || s.Name || 'Anonymous')}</strong> — ${s.score || s.Score}/${s.total || s.Total} <span style="color:var(--text-muted); font-size:0.9rem;">${s.date || s.Date || ''}</span></li>`).join('') +
+    '</ol>';
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"]/g, function (m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[m]; });
+}
+
 // Initial Call
-loadQuizQuestion();
+initQuiz();
 selectLetter('A');

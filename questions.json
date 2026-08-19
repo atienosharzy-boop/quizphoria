@@ -17,4 +17,89 @@
     "category": "Geography",
     "hint": "It is the third planet from the Sun."
   }
+,
+  {
+    "question": "Which programming language is primarily used for web pages to add interactivity?",
+    "answer": "JavaScript",
+    "category": "Computer Science",
+    "hint": "It's often abbreviated as JS."
+  },
+  {
+    "question": "What is 7 x 8?",
+    "answer": "56",
+    "category": "Math",
+    "hint": "Think of 7 groups of 8."
+  },
+  {
+    "question": "Which gas do plants use for photosynthesis?",
+    "answer": "Carbon Dioxide",
+    "category": "Science",
+    "hint": "They take in this gas and release oxygen."
+  },
+  {
+    "question": "Who was the first President of the United States?",
+    "answer": "George Washington",
+    "category": "History",
+    "hint": "He led the Continental Army."
+  },
+  {
+    "question": "What is the capital city of France?",
+    "answer": "Paris",
+    "category": "Geography",
+    "hint": "Known as the City of Light."
+  },
+  {
+    "question": "What is the value of Pi rounded to two decimal places?",
+    "answer": "3.14",
+    "category": "Math",
+    "hint": "It's approximately 3.14159..."
+  },
+  {
+    "question": "In computing, what does 'CPU' stand for?",
+    "answer": "Central Processing Unit",
+    "category": "Computer Science",
+    "hint": "It's often called the 'brain' of the computer."
+  },
+  {
+    "question": "Which organ pumps blood throughout the human body?",
+    "answer": "Heart",
+    "category": "Science",
+    "hint": "It's a muscular organ located in the chest."
+  },
+  {
+    "question": "What is the antonym of 'hot'?",
+    "answer": "Cold",
+    "category": "English",
+    "hint": "Think of temperature opposites."
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "answer": "Mars",
+    "category": "Science",
+    "hint": "It's named after the Roman god of war."
+  },
+  {
+    "question": "What is 12 + 15?",
+    "answer": "27",
+    "category": "Math",
+    "hint": "Add the two numbers together."
+  },
+  {
+    "question": "Which language do you write HTML in?",
+    "answer": "Markup",
+    "category": "Computer Science",
+    "hint": "It's not a programming language but a markup language."
+  },
+  {
+    "question": "What do you call a picture made of pixels on a computer?",
+    "answer": "Image",
+    "category": "Computer Science",
+    "hint": "Often stored as PNG, JPG, or GIF."
+  },
+  {
+    "question": "Who wrote the play 'Romeo and Juliet'?",
+    "answer": "William Shakespeare",
+    "category": "Literature",
+    "hint": "An English playwright from the 16th century."
+  }
 ]

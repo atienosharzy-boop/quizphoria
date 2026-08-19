@@ -247,6 +247,22 @@ body {
   border: 6px solid #fff;
 }
 
+/* Category and input styling inside quiz wrapper */
+#category-select, #player-name {
+  font-size: 1rem;
+}
+
+/* Leaderboard box */
+#leaderboard {
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.btn-purple { background: var(--primary-purple); color: white; }
+
+
 .quiz-top {
   display: flex;
   justify-content: space-between;
