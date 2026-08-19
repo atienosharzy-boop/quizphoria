@@ -6,6 +6,11 @@ Files to look at
 - `script.js` — Main frontend logic: loads `questions.json`, populates categories, and runs the quiz.
 - `style.css` — Visual styles.
 
+New interactive bits
+
+- `demo.html` includes a progress bar, animated orb, confetti celebration and leaderboard display.
+- `docs.html` now has an API tester so you can try `/api/questions` and `/api/submit` from the browser.
+
 Customizing questions
 
 - Edit `questions.json` to add or modify quiz items. Each entry should include `question`, `answer`, and `category` (optional `hint`).

@@ -128,6 +128,13 @@ function loadQuizQuestion() {
   optionsGridEl.innerHTML = "";
   nextBtn.style.display = "none";
 
+  // update progress bar
+  const progressFill = document.getElementById('progress-fill');
+  if (progressFill && questions.length > 0) {
+    const pct = Math.round(((currentQIndex) / questions.length) * 100);
+    progressFill.style.width = pct + '%';
+  }
+
   // Accept options as an array, or build simple multiple choice from answer
   let opts = q.options;
   if (!opts || !Array.isArray(opts)) {
@@ -185,6 +192,21 @@ function showQuizResults() {
   if (finalScoreText) finalScoreText.textContent = `You earned ${score} out of ${questions.length} Stars! ⭐`;
   // submit results to backend and populate leaderboard
   submitResults();
+  // celebrate!
+  // fill progress bar
+  const progressFill = document.getElementById('progress-fill');
+  if (progressFill) progressFill.style.width = '100%';
+  startConfetti();
+  // show badge locally
+  try {
+    const pct = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
+    let badge = 'Participation';
+    if (pct === 100) badge = 'Gold Champion';
+    else if (pct >= 80) badge = 'Silver Achiever';
+    else if (pct >= 50) badge = 'Bronze Star';
+    const bd = document.getElementById('badge-display');
+    if (bd) bd.innerHTML = `<div style="background:linear-gradient(90deg,#fff,#fbf7ff); padding:0.6rem 1rem; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08); display:inline-block;"><strong>${badge}</strong> — ${pct}%</div>`;
+  } catch(e){}
 }
 
 function resetQuiz() {
@@ -264,3 +286,62 @@ function escapeHtml(str) {
 // Initial Call
 initQuiz();
 selectLetter('A');
+
+// --- Simple confetti implementation ---
+function startConfetti(duration = 2500) {
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpi = window.devicePixelRatio || 1;
+  function resize() {
+    canvas.width = window.innerWidth * dpi;
+    canvas.height = window.innerHeight * dpi;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.scale(dpi, dpi);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = ['#ff6b6b','#f59e0b','#06b6d4','#8b5cf6','#10b981'];
+  const pieces = [];
+  for (let i=0;i<120;i++) {
+    pieces.push({ x: Math.random()*window.innerWidth, y: Math.random()*-window.innerHeight, vx: (Math.random()-0.5)*6, vy: Math.random()*6+2, size: Math.random()*8+4, color: colors[Math.floor(Math.random()*colors.length)], rot: Math.random()*360 });
+  }
+
+  let start = performance.now();
+  function frame(now) {
+    const t = now - start;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for (const p of pieces) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.08; // gravity
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rot + t/50) * Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+      ctx.restore();
+    }
+    if (t < duration) requestAnimationFrame(frame);
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); window.removeEventListener('resize', resize); }
+  }
+  requestAnimationFrame(frame);
+}
+
+// Share / copy result button
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'share-score') {
+    const text = document.getElementById('final-score') ? document.getElementById('final-score').textContent : '';
+    if (navigator.share) {
+      navigator.share({ title: 'My Quizphoria Result', text }).catch(()=>{});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(text || 'My Quizphoria Result').then(() => {
+        alert('Result copied to clipboard!');
+      });
+    } else {
+      alert(text || 'Result ready to share');
+    }
+  }
+});

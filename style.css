@@ -28,6 +28,37 @@ body {
   position: relative;
 }
 
+/* Unique animated background shapes */
+.bg-shapes {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-shapes .shape {
+  position: absolute;
+  width: 320px; height: 320px; border-radius: 40%;
+  filter: blur(40px); opacity: 0.18; transform: translate3d(0,0,0);
+  animation: floaty 12s ease-in-out infinite;
+}
+.bg-shapes .shape.s1 { left: -120px; top: -80px; background: radial-gradient(circle,#ff80bf,#ffb86b); animation-delay: 0s; }
+.bg-shapes .shape.s2 { right: -140px; bottom: -90px; background: radial-gradient(circle,#60a5fa,#7c3aed); animation-delay: 2s; }
+.bg-shapes .shape.s3 { left: 20%; bottom: 10%; background: radial-gradient(circle,#34d399,#06b6d4); width:260px;height:260px; animation-delay: 4s; }
+
+/* Dark theme overrides */
+.dark {
+  --nav-bg: rgba(8,10,22,0.85);
+  --card-bg: #0b1020;
+  --text-main: #e6eef8;
+  --text-muted: #9fb2c8;
+}
+
+/* Navbar mascot and toggle */
+.mascot { width:40px; height:40px; display:inline-block; vertical-align:middle; margin-right:0.6rem; }
+.theme-toggle { background:transparent; border:1px solid rgba(0,0,0,0.06); padding:0.4rem 0.6rem; border-radius:10px; cursor:pointer; }
+.theme-toggle:hover { transform: translateY(-2px); }
+
 /* --- NAVBAR WITH REAL MULTI-PAGE LINKS --- */
 .navbar {
   display: flex;
@@ -235,6 +266,47 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
 }
+
+/* --- Animations & Visuals --- */
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.feature-card { transform-origin: center; }
+.feature-card:hover { animation: floaty 4s ease-in-out infinite, pulse 1.2s ease-in-out; }
+.feature-img { transition: transform 0.6s ease, filter 0.6s ease; }
+.feature-card:hover .feature-img { transform: scale(1.06) rotate(-1deg); filter: brightness(1.05); }
+
+/* --- Demo additions --- */
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-pink), var(--primary-yellow));
+  transition: width 300ms ease;
+}
+
+#confetti-canvas { position: fixed; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2000; }
+
+/* Docs interactive boxes */
+.api-box { background: linear-gradient(180deg,#fff,#fbfbff); border-radius:12px; padding:1rem; box-shadow: 0 10px 30px rgba(2,6,23,0.08); }
+
 
 /* --- QUIZ CONTAINER --- */
 .quiz-wrapper {

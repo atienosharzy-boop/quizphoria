@@ -9,13 +9,14 @@
 <body>
 
   <nav class="navbar">
-    <a href="index.html" class="logo">✨ Quizphoria!</a>
+    <a href="index.html" class="logo"><span class="mascot">🎯</span> Quizphoria!</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="features.html">Features</a></li>
       <li><a href="demo.html">Interactive Demo</a></li>
       <li><a href="docs.html" class="active">Documentation</a></li>
       <li><a href="demo.html" class="btn-nav">Start Playing 🚀</a></li>
+      <li><button class="theme-toggle-btn theme-toggle" title="Toggle theme">🌓</button></li>
     </ul>
   </nav>
 
@@ -39,12 +40,57 @@
     "answer": 1
   }
 ]</pre>
+      <h2 style="font-family: 'Fredoka'; color: var(--primary-purple); margin-bottom: 1rem;">3. Interactive API Tester</h2>
+      <div class="api-box" style="margin-bottom:1rem;">
+        <strong>Fetch Questions</strong>
+        <div style="display:flex; gap:0.6rem; margin-top:0.6rem;">
+          <input id="api-category" placeholder="Category (or All)" style="padding:0.6rem; border-radius:8px; border:1px solid #e6e6e6; flex:1;" />
+          <button id="btn-fetch" class="btn btn-pink">Fetch</button>
+        </div>
+        <pre id="api-questions" style="margin-top:0.8rem; max-height:220px; overflow:auto; background:#0f172a; color:#c7f9e3; padding:0.8rem; border-radius:8px;"></pre>
+      </div>
+
+      <div class="api-box">
+        <strong>Submit Sample Answers</strong>
+        <p style="color:var(--text-muted); font-size:0.95rem;">You can POST a sample payload and see the response.</p>
+        <textarea id="api-payload" style="width:100%; height:120px; padding:0.6rem; border-radius:8px; border:1px solid #e6e6e6;">{ "playerName": "Demo User", "answers": ["",""], "category": "All" }</textarea>
+        <div style="display:flex; gap:0.6rem; margin-top:0.6rem;"><button id="btn-submit-api" class="btn btn-purple">Submit</button><button id="btn-clear" class="btn">Clear</button></div>
+        <pre id="api-response" style="margin-top:0.8rem; max-height:260px; overflow:auto; background:#0f172a; color:#fef3c7; padding:0.8rem; border-radius:8px;"></pre>
+      </div>
     </div>
   </div>
 
   <footer class="footer">
     <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
   </footer>
+
+  <script src="script.js"></script>
+  <script src="ui.js"></script>
+  <script>
+    // docs interactive behavior
+    document.getElementById('btn-fetch').addEventListener('click', async () => {
+      const cat = document.getElementById('api-category').value || 'All';
+      try {
+        const res = await fetch('/api/questions?category=' + encodeURIComponent(cat));
+        const data = await res.json();
+        document.getElementById('api-questions').textContent = JSON.stringify(data, null, 2);
+      } catch (e) { document.getElementById('api-questions').textContent = 'Error: ' + e.message }
+    });
+
+    document.getElementById('btn-submit-api').addEventListener('click', async () => {
+      const raw = document.getElementById('api-payload').value;
+      try {
+        const payload = JSON.parse(raw);
+        const res = await fetch('/api/submit', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+        const data = await res.json();
+        document.getElementById('api-response').textContent = JSON.stringify(data, null, 2);
+      } catch (e) { document.getElementById('api-response').textContent = 'Error: ' + e.message }
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      document.getElementById('api-response').textContent = '';
+    });
+  </script>
 
 </body>
 </html>

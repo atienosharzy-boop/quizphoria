@@ -25,6 +25,12 @@ Project structure
 - `highscores.json` — Leaderboard persisted by the backend
 - `demo.html`, `index.html`, `script.js`, `style.css` — Frontend UI
 
+Interactive features
+
+- `demo.html` now includes a dynamic progress bar, animated visuals, and a leaderboard with confetti celebrations when you finish a quiz.
+- `features.html` covers Languages (English, Kiswahili) and Programming (Python, JavaScript, Java) subjects.
+- `docs.html` contains an interactive API tester for `/api/questions` and `/api/submit`.
+
 Endpoints
 
 See `API.md` for details on available API endpoints and example requests/responses.

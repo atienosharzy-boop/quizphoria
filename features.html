@@ -9,30 +9,40 @@
 <body>
 
   <nav class="navbar">
-    <a href="index.html" class="logo">✨ Quizphoria!</a>
+    <a href="index.html" class="logo"><span class="mascot">🎯</span> Quizphoria!</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="features.html" class="active">Features</a></li>
       <li><a href="demo.html">Interactive Demo</a></li>
       <li><a href="docs.html">Documentation</a></li>
       <li><a href="demo.html" class="btn-nav">Start Playing 🚀</a></li>
+      <li><button class="theme-toggle-btn theme-toggle" title="Toggle theme">🌓</button></li>
     </ul>
   </nav>
 
   <div class="page-container">
     <div class="page-header">
-      <h1>🔬 Science, Math & Technology Features</h1>
-      <p>Explore how Quizphoria helps students excel across essential subjects!</p>
+      <h1>🔬 Quizphoria Features & Subjects</h1>
+      <p>Try quizzes across Languages, STEM, and Programming — made fun and interactive.</p>
     </div>
-
     <div class="feature-grid">
-      <!-- Computer Science Card -->
+      <!-- Languages -->
       <article class="feature-card">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Computer Coding" class="feature-img">
+        <img src="https://images.unsplash.com/photo-1520975913365-666b6f9b3f3f?auto=format&fit=crop&w=800&q=80" alt="English" class="feature-img">
         <div class="feature-content">
-          <span class="feature-tag tag-tech">Computer Science</span>
-          <h3>Interactive Coding Quizzes</h3>
-          <p>Learn Go programming, HTML/CSS, and terminal algorithms through dynamic problem solving and real-time execution feedback.</p>
+          <span class="feature-tag tag-tech">Languages</span>
+          <h3>English & Kiswahili</h3>
+          <p>Vocabulary, grammar, and comprehension quizzes — available in both English and Kiswahili for inclusive learning.</p>
+        </div>
+      </article>
+
+      <!-- Programming Languages -->
+      <article class="feature-card">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Python" class="feature-img">
+        <div class="feature-content">
+          <span class="feature-tag tag-tech">Programming</span>
+          <h3>Python, JavaScript & Java</h3>
+          <p>Short exercises and quizzes tailored to programming concepts in Python, JavaScript, and Java — perfect for beginners.</p>
         </div>
       </article>
 
@@ -62,5 +72,6 @@
     <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
   </footer>
 
+  <script src="ui.js"></script>
 </body>
 </html>
