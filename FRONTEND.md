@@ -10,6 +10,9 @@ New interactive bits
 
 - `demo.html` includes a progress bar, animated orb, confetti celebration and leaderboard display.
 - `docs.html` now has an API tester so you can try `/api/questions` and `/api/submit` from the browser.
+ - Languages are now separated into `English` and `Kiswahili` features with dedicated illustrations.
+ - Languages are now separated into `English`, `Kiswahili`, `Français`, and `Deutsch` features with dedicated illustrations.
+ - Each language card includes guided prompts; we can add audio pronunciation and extra language question packs on request.
 
 Customizing questions
 
