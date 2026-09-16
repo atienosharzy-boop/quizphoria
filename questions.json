@@ -1,105 +1,416 @@
 [
   {
+    "id": 1,
+    "category": "Science",
     "question": "Which planet in our solar system has the most confirmed moons?",
+    "options": ["Saturn", "Jupiter", "Uranus", "Neptune"],
     "answer": "Saturn",
-    "category": "Science",
-    "hint": "It is famous for its bright, prominent ring system."
+    "hint": "It is famous for its bright, prominent ring system.",
+    "explanation": "Saturn currently has over 140 confirmed moons, officially surpassing Jupiter."
   },
   {
+    "id": 2,
+    "category": "Math",
     "question": "How many days are in a leap year?",
+    "options": ["365", "366", "364", "360"],
     "answer": "366",
-    "category": "Math",
-    "hint": "It has one extra day added to February."
+    "hint": "An extra day is added to February every 4 years.",
+    "explanation": "A leap year has 366 days because February has 29 days instead of 28."
   },
   {
+    "id": 3,
+    "category": "Geography",
     "question": "What planet do we live on?",
+    "options": ["Mars", "Venus", "Earth", "Mercury"],
     "answer": "Earth",
-    "category": "Geography",
-    "hint": "It is the third planet from the Sun."
-  }
-,
+    "hint": "It is the third planet from the Sun.",
+    "explanation": "Earth is the third planet from the Sun and the only known astronomical object harboring life."
+  },
   {
-    "question": "Which programming language is primarily used for web pages to add interactivity?",
+    "id": 4,
+    "category": "Computer Science",
+    "question": "Which programming language is primarily used to add interactivity to web pages?",
+    "options": ["JavaScript", "HTML", "CSS", "SQL"],
     "answer": "JavaScript",
-    "category": "Computer Science",
-    "hint": "It's often abbreviated as JS."
+    "hint": "It runs directly in browsers and is often abbreviated as JS.",
+    "explanation": "JavaScript is the premier client-side scripting language that makes web pages interactive and dynamic."
   },
   {
-    "question": "What is 7 x 8?",
+    "id": 5,
+    "category": "Math",
+    "question": "What is 7 multiplied by 8?",
+    "options": ["54", "56", "64", "48"],
     "answer": "56",
-    "category": "Math",
-    "hint": "Think of 7 groups of 8."
+    "hint": "Think of 7 groups of 8 (or 8 x 7).",
+    "explanation": "7 x 8 = 56."
   },
   {
-    "question": "Which gas do plants use for photosynthesis?",
+    "id": 6,
+    "category": "Science",
+    "question": "Which gas do green plants absorb during photosynthesis?",
+    "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
     "answer": "Carbon Dioxide",
-    "category": "Science",
-    "hint": "They take in this gas and release oxygen."
+    "hint": "Plants take in this gas and release oxygen.",
+    "explanation": "Plants capture carbon dioxide (CO2) from the atmosphere and use sunlight to produce glucose and oxygen."
   },
   {
-    "question": "Who was the first President of the United States?",
-    "answer": "George Washington",
+    "id": 7,
     "category": "History",
-    "hint": "He led the Continental Army."
+    "question": "Who was the first President of the United States?",
+    "options": ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"],
+    "answer": "George Washington",
+    "hint": "He commanded the Continental Army during the American Revolutionary War.",
+    "explanation": "George Washington served as the first U.S. President from 1789 to 1797."
   },
   {
-    "question": "What is the capital city of France?",
-    "answer": "Paris",
+    "id": 8,
     "category": "Geography",
-    "hint": "Known as the City of Light."
+    "question": "What is the capital city of France?",
+    "options": ["Lyon", "Marseille", "Paris", "Bordeaux"],
+    "answer": "Paris",
+    "hint": "Known around the world as the City of Light.",
+    "explanation": "Paris is the capital and most populous city of France, situated along the Seine River."
   },
   {
-    "question": "What is the value of Pi rounded to two decimal places?",
+    "id": 9,
+    "category": "Math",
+    "question": "What is the value of Pi (π) rounded to two decimal places?",
+    "options": ["3.12", "3.14", "3.16", "3.18"],
     "answer": "3.14",
-    "category": "Math",
-    "hint": "It's approximately 3.14159..."
+    "hint": "It begins with 3.14159...",
+    "explanation": "Pi is an irrational mathematical constant representing the ratio of a circle's circumference to its diameter (~3.14)."
   },
   {
+    "id": 10,
+    "category": "Computer Science",
     "question": "In computing, what does 'CPU' stand for?",
+    "options": ["Central Processing Unit", "Computer Personal Unit", "Central Program Utility", "Core Processing User"],
     "answer": "Central Processing Unit",
-    "category": "Computer Science",
-    "hint": "It's often called the 'brain' of the computer."
+    "hint": "It is often described as the 'brain' of the computer.",
+    "explanation": "The CPU (Central Processing Unit) executes instructions comprising a computer program."
   },
   {
-    "question": "Which organ pumps blood throughout the human body?",
+    "id": 11,
+    "category": "Science",
+    "question": "Which muscular organ pumps blood throughout the human body?",
+    "options": ["Lungs", "Brain", "Heart", "Liver"],
     "answer": "Heart",
-    "category": "Science",
-    "hint": "It's a muscular organ located in the chest."
+    "hint": "It beats rhythmically inside your chest.",
+    "explanation": "The heart is a muscular organ that pumps blood through the blood vessels of the circulatory system."
   },
   {
-    "question": "What is the antonym of 'hot'?",
-    "answer": "Cold",
+    "id": 12,
     "category": "English",
-    "hint": "Think of temperature opposites."
+    "question": "What is the antonym (opposite) of the word 'fragile'?",
+    "options": ["Delicate", "Sturdy", "Weak", "Brittle"],
+    "answer": "Sturdy",
+    "hint": "Think of something that is tough and does not break easily.",
+    "explanation": "Fragile means easily broken or damaged, so its direct opposite is sturdy or robust."
   },
   {
-    "question": "Which planet is known as the Red Planet?",
-    "answer": "Mars",
+    "id": 13,
     "category": "Science",
-    "hint": "It's named after the Roman god of war."
+    "question": "Which planet is commonly referred to as the 'Red Planet'?",
+    "options": ["Mars", "Venus", "Jupiter", "Mercury"],
+    "answer": "Mars",
+    "hint": "It gets its reddish appearance from iron oxide (rust) on its surface.",
+    "explanation": "Mars appears reddish to the naked eye due to iron oxide minerals across its surface."
   },
   {
-    "question": "What is 12 + 15?",
-    "answer": "27",
+    "id": 14,
     "category": "Math",
-    "hint": "Add the two numbers together."
+    "question": "What is 12 + 15?",
+    "options": ["25", "27", "28", "29"],
+    "answer": "27",
+    "hint": "Add the tens (10+10) then the units (2+5).",
+    "explanation": "12 + 15 = 27."
   },
   {
-    "question": "Which language do you write HTML in?",
-    "answer": "Markup",
+    "id": 15,
     "category": "Computer Science",
-    "hint": "It's not a programming language but a markup language."
+    "question": "What does HTML stand for in web development?",
+    "options": ["HyperText Markup Language", "HighText Machine Language", "Hyperlink Textual Markup Level", "Home Tool Markup Language"],
+    "answer": "HyperText Markup Language",
+    "hint": "It is the standard markup language used to structure web documents.",
+    "explanation": "HTML stands for HyperText Markup Language, the standard code used to structure a web page and its content."
   },
   {
-    "question": "What do you call a picture made of pixels on a computer?",
-    "answer": "Image",
-    "category": "Computer Science",
-    "hint": "Often stored as PNG, JPG, or GIF."
+    "id": 16,
+    "category": "Programming",
+    "question": "In Python, which built-in function outputs text or data to the terminal console?",
+    "options": ["console.log()", "echo()", "print()", "System.out.println()"],
+    "answer": "print()",
+    "hint": "It is a simple 5-letter word that means to produce output.",
+    "explanation": "In Python, the `print()` function sends values to the standard console output."
   },
   {
-    "question": "Who wrote the play 'Romeo and Juliet'?",
-    "answer": "William Shakespeare",
+    "id": 17,
+    "category": "Programming",
+    "question": "Which keyword is used in JavaScript to declare a variable whose value cannot be reassigned?",
+    "options": ["let", "var", "const", "static"],
+    "answer": "const",
+    "hint": "Short for 'constant'.",
+    "explanation": "The `const` keyword declares block-scoped variables that cannot be reassigned after initialization."
+  },
+  {
+    "id": 18,
+    "category": "Programming",
+    "question": "In Java, what is the entry point method signature for every standalone application?",
+    "options": ["public void main()", "public static void main(String[] args)", "def main():", "func main()"],
+    "answer": "public static void main(String[] args)",
+    "hint": "It must be public, static, return void, and accept an array of String arguments.",
+    "explanation": "In Java, the JVM looks for `public static void main(String[] args)` to launch an application."
+  },
+  {
+    "id": 19,
+    "category": "Kiswahili",
+    "question": "What is the Kiswahili greeting for 'Welcome' or 'You are welcome'?",
+    "options": ["Jambo", "Karibu", "Asante", "Habari"],
+    "answer": "Karibu",
+    "hint": "Used when receiving a guest into your home or classroom.",
+    "explanation": "'Karibu' translates to 'Welcome' in Kiswahili (plural: 'Karibuni')."
+  },
+  {
+    "id": 20,
+    "category": "Kiswahili",
+    "question": "How do you say 'Thank you very much' in Kiswahili?",
+    "options": ["Asante sana", "Habari gani", "Kwaheri", "Hujambo"],
+    "answer": "Asante sana",
+    "hint": "'Asante' means thanks, and 'sana' means very much.",
+    "explanation": "'Asante sana' means 'Thank you very much' in Kiswahili."
+  },
+  {
+    "id": 21,
+    "category": "Français",
+    "question": "What is the French word for 'Good morning' or 'Hello'?",
+    "options": ["Au revoir", "Bonjour", "Merci", "S'il vous plaît"],
+    "answer": "Bonjour",
+    "hint": "A combination of 'bon' (good) and 'jour' (day).",
+    "explanation": "'Bonjour' is the standard French greeting meaning 'Good day' or 'Hello'."
+  },
+  {
+    "id": 22,
+    "category": "Deutsch",
+    "question": "How do you say 'Thank you' in German?",
+    "options": ["Bitte", "Danke", "Guten Tag", "Tschüss"],
+    "answer": "Danke",
+    "hint": "A friendly 5-letter word starting with 'D'.",
+    "explanation": "'Danke' means 'Thank you' in German ('Vielen Dank' means 'Many thanks')."
+  },
+  {
+    "id": 23,
     "category": "Literature",
-    "hint": "An English playwright from the 16th century."
+    "question": "Who authored the famous tragedy 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+    "answer": "William Shakespeare",
+    "hint": "Known as the 'Bard of Avon'.",
+    "explanation": "William Shakespeare wrote 'Romeo and Juliet' in the late 16th century."
+  },
+  {
+    "id": 24,
+    "category": "Français",
+    "question": "Which of the following is the French word for 'Thank you'?",
+    "options": ["Merci", "Pardon", "Oui", "S'il vous plaît"],
+    "answer": "Merci",
+    "hint": "Common French polite expression.",
+    "explanation": "'Merci' means 'Thank you' in French."
+  },
+  {
+    "id": 25,
+    "category": "Français",
+    "question": "What color is 'bleu' in English?",
+    "options": ["Blue", "Red", "Green", "Yellow"],
+    "answer": "Blue",
+    "hint": "Cognate with the English word.",
+    "explanation": "'Bleu' is the French word for Blue."
+  },
+  {
+    "id": 26,
+    "category": "Français",
+    "question": "What number is 'cinq' in French?",
+    "options": ["5", "3", "7", "10"],
+    "answer": "5",
+    "hint": "It is between four (quatre) and six (six).",
+    "explanation": "'Cinq' is French for the number 5."
+  },
+  {
+    "id": 27,
+    "category": "Deutsch",
+    "question": "What is the German word for 'Good morning'?",
+    "options": ["Guten Morgen", "Gute Nacht", "Auf Wiedersehen", "Hallo"],
+    "answer": "Guten Morgen",
+    "hint": "Guten means good, Morgen means morning.",
+    "explanation": "'Guten Morgen' translates to 'Good morning'."
+  },
+  {
+    "id": 28,
+    "category": "Deutsch",
+    "question": "What color does 'Rot' represent in German?",
+    "options": ["Red", "Blue", "Black", "White"],
+    "answer": "Red",
+    "hint": "Sounds very similar to the English word.",
+    "explanation": "'Rot' is the German word for Red."
+  },
+  {
+    "id": 29,
+    "category": "Deutsch",
+    "question": "What number is 'zehn' in German?",
+    "options": ["10", "2", "8", "12"],
+    "answer": "10",
+    "hint": "Two hands with all fingers.",
+    "explanation": "'Zehn' is the German word for 10."
+  },
+  {
+    "id": 30,
+    "category": "Kiswahili",
+    "question": "What does the Kiswahili word 'Simba' mean in English?",
+    "options": ["Lion", "Elephant", "Cheetah", "Giraffe"],
+    "answer": "Lion",
+    "hint": "The king of the savannah made famous in folklore.",
+    "explanation": "'Simba' means 'Lion' in Kiswahili."
+  },
+  {
+    "id": 31,
+    "category": "Kiswahili",
+    "question": "What is the number 'Moja' in Kiswahili?",
+    "options": ["One (1)", "Two (2)", "Three (3)", "Five (5)"],
+    "answer": "One (1)",
+    "hint": "The very first counting number: Moja, Mbili, Tatu...",
+    "explanation": "'Moja' is the Kiswahili word for the number 1."
+  },
+  {
+    "id": 32,
+    "category": "English",
+    "question": "Which of the following words is a noun?",
+    "options": ["Mountain", "Quickly", "Sing", "Beautiful"],
+    "answer": "Mountain",
+    "hint": "A person, place, thing, or idea.",
+    "explanation": "'Mountain' is a noun because it names a physical place or object."
+  },
+  {
+    "id": 33,
+    "category": "English",
+    "question": "What punctuation mark is used to conclude a direct question?",
+    "options": ["Question mark (?)", "Exclamation mark (!)", "Comma (,)", "Period (.)"],
+    "answer": "Question mark (?)",
+    "hint": "It looks like a hook over a dot.",
+    "explanation": "A question mark (?) ends interrogative sentences."
+  },
+  {
+    "id": 34,
+    "category": "English",
+    "question": "Which word is a synonym for 'joyful'?",
+    "options": ["Happy", "Gloomy", "Angry", "Tired"],
+    "answer": "Happy",
+    "hint": "Expressing good cheer and delight.",
+    "explanation": "'Joyful' and 'Happy' share the same positive meaning."
+  },
+  {
+    "id": 35,
+    "category": "Literature",
+    "question": "In Lewis Carroll's classic book, who fell down the rabbit hole?",
+    "options": ["Alice", "Dorothy", "Wendy", "Cinderella"],
+    "answer": "Alice",
+    "hint": "Her adventures take place in Wonderland.",
+    "explanation": "Alice falls down the rabbit hole in 'Alice's Adventures in Wonderland'."
+  },
+  {
+    "id": 36,
+    "category": "Literature",
+    "question": "Which mythical beast breathes fire in classic folklore and fantasy tales?",
+    "options": ["Dragon", "Unicorn", "Phoenix", "Centaur"],
+    "answer": "Dragon",
+    "hint": "A legendary reptilian monster with wings and sharp claws.",
+    "explanation": "Dragons are mythical winged creatures renowned for breathing fire."
+  },
+  {
+    "id": 37,
+    "category": "Computer Science",
+    "question": "What does 'RAM' stand for in computer hardware?",
+    "options": ["Random Access Memory", "Rapid Action Module", "Read Always Memory", "Remote Access Machine"],
+    "answer": "Random Access Memory",
+    "hint": "The computer's high-speed short-term working memory.",
+    "explanation": "RAM (Random Access Memory) allows read and write operations at nearly identical speed regardless of physical location."
+  },
+  {
+    "id": 38,
+    "category": "Programming",
+    "question": "In Git version control, which command creates a snapshot of staged changes?",
+    "options": ["git commit", "git push", "git clone", "git status"],
+    "answer": "git commit",
+    "hint": "It records changes to the local repository.",
+    "explanation": "`git commit` records a snapshot of the staged changes in your git repository."
+  },
+  {
+    "id": 39,
+    "category": "Math",
+    "question": "How many sides does a hexagon have?",
+    "options": ["6", "5", "8", "4"],
+    "answer": "6",
+    "hint": "Think of honeycomb cells in a beehive.",
+    "explanation": "A hexagon is a polygon with 6 straight sides and 6 vertices."
+  },
+  {
+    "id": 40,
+    "category": "Math",
+    "question": "What is 15% of 100?",
+    "options": ["15", "10", "20", "25"],
+    "answer": "15",
+    "hint": "'Percent' literally means 'per hundred'.",
+    "explanation": "15% of 100 is 15."
+  },
+  {
+    "id": 41,
+    "category": "Science",
+    "question": "What is the hardest natural substance known on Earth?",
+    "options": ["Diamond", "Gold", "Iron", "Granite"],
+    "answer": "Diamond",
+    "hint": "Made of crystal carbon; rated 10 on the Mohs scale.",
+    "explanation": "Diamond is the hardest known natural mineral on Earth."
+  },
+  {
+    "id": 42,
+    "category": "Science",
+    "question": "What fundamental force pulls objects toward the center of the Earth?",
+    "options": ["Gravity", "Magnetism", "Friction", "Inertia"],
+    "answer": "Gravity",
+    "hint": "Mathematically formulated by Sir Isaac Newton.",
+    "explanation": "Gravity is the attractive force that draws mass toward planetary centers."
+  },
+  {
+    "id": 43,
+    "category": "Geography",
+    "question": "What is the largest ocean on Earth?",
+    "options": ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+    "answer": "Pacific Ocean",
+    "hint": "It covers more than 30% of the Earth's surface.",
+    "explanation": "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions."
+  },
+  {
+    "id": 44,
+    "category": "Geography",
+    "question": "Which continent is the Sahara Desert located on?",
+    "options": ["Africa", "Asia", "South America", "Australia"],
+    "answer": "Africa",
+    "hint": "The vast northern region of this continent.",
+    "explanation": "The Sahara Desert spans across 11 nations in Northern Africa."
+  },
+  {
+    "id": 45,
+    "category": "History",
+    "question": "In which ancient civilization were the Great Pyramids of Giza constructed?",
+    "options": ["Ancient Egypt", "Ancient Greece", "Mesopotamia", "Roman Empire"],
+    "answer": "Ancient Egypt",
+    "hint": "Along the Nile River in North Africa.",
+    "explanation": "The Great Pyramids of Giza were built by the Ancient Egyptians during the Old Kingdom."
+  },
+  {
+    "id": 46,
+    "category": "History",
+    "question": "In which year did Apollo 11 astronauts first land on the Moon?",
+    "options": ["1969", "1959", "1975", "1981"],
+    "answer": "1969",
+    "hint": "Neil Armstrong took 'one small step for man' in this year.",
+    "explanation": "Apollo 11 successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon in July 1969."
   }
 ]

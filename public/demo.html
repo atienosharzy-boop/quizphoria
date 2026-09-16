@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizphoria | Interactive Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <a href="index.html" class="logo"><span class="mascot">🎯</span> Quizphoria!</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="demo.html" class="active">Interactive Demo</a></li>
+      <li><a href="docs.html">Documentation</a></li>
+      <li><a href="https://github.com/atienosharzy-boop/quizphoria" target="_blank" rel="noopener noreferrer" class="btn-nav">GitHub Repo</a></li>
+      <li><button class="theme-toggle-btn theme-toggle" title="Toggle color theme" aria-label="Toggle color theme">🌓</button></li>
+    </ul>
+  </nav>
+
+  <main class="page-container">
+    <header class="page-header">
+      <h1>🎮 Interactive Quiz Demo</h1>
+      <p>Challenge yourself with dynamic, server-graded quizzes across multiple subjects!</p>
+    </header>
+
+    <section class="quiz-wrapper" aria-live="polite">
+      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Quiz progress">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <canvas id="confetti-canvas"></canvas>
+
+      <div class="quiz-controls">
+        <label for="category-select" style="font-weight:600;">Subject:</label>
+        <select id="category-select" aria-label="Choose quiz subject">
+          <option value="All">All Subjects</option>
+        </select>
+
+        <label for="player-name" style="font-weight:600; margin-left:0.5rem;">Player Name:</label>
+        <input id="player-name" maxlength="40" placeholder="Enter your name (optional)" aria-label="Player name" />
+      </div>
+
+      <div id="quiz-active">
+        <div class="quiz-top">
+          <span id="q-num" class="pill">Loading question...</span>
+          <span id="score-num" class="pill" style="color: var(--primary-pink);">Category: General</span>
+        </div>
+
+        <div style="text-align:center; margin-bottom:1.5rem;">
+          <img src="images/hero_mascot.jpg" alt="Quizphoria Mascot" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid var(--primary-pink); box-shadow: 0 10px 25px rgba(236,72,153,0.3); animation: floaty 4s ease-in-out infinite;">
+        </div>
+
+        <h2 id="q-text" class="question-text">Loading question...</h2>
+        <div id="options-grid" class="options-list"></div>
+        <button id="next-btn" class="btn btn-pink" style="display: none; margin-top: 2rem; width: 100%;">Next Question ➔</button>
+      </div>
+
+      <div id="quiz-end" style="display: none; text-align: center;">
+        <div style="font-size: 3.5rem;">🏆</div>
+        <h2 style="font-family: 'Fredoka', sans-serif; margin: 0.8rem 0; font-size:2.2rem;">Fantastic Effort!</h2>
+        <p id="final-score" style="font-size: 1.35rem; color: var(--text-muted); margin-bottom: 2rem;"></p>
+
+        <div style="margin-bottom:1.5rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+          <button id="share-score" class="btn btn-purple">Share Result 🚀</button>
+          <button id="save-image" class="btn btn-pink">Save Result Image 🎨</button>
+          <button onclick="resetQuiz()" class="btn btn-yellow">Play Again 🔄</button>
+        </div>
+
+        <div id="results-review" class="results-review"></div>
+
+        <div id="leaderboard" style="margin-top:2rem; text-align:left; max-width:540px; margin-left:auto; margin-right:auto;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="ui.js"></script>
+  <script>
+    // Save image button handler
+    const saveBtn = document.getElementById('save-image');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const name = (document.getElementById('player-name') || {}).value || 'Player';
+        const scoreText = document.getElementById('final-score') ? document.getElementById('final-score').innerText : '';
+        if (typeof window.generateResultImage === 'function') {
+          window.generateResultImage(name, scoreText);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

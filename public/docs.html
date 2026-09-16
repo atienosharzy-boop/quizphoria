@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizphoria | Developer Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <a href="index.html" class="logo"><span class="mascot">🎯</span> Quizphoria!</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="demo.html">Interactive Demo</a></li>
+      <li><a href="docs.html" class="active">Documentation</a></li>
+      <li><a href="demo.html" class="btn-nav">Start Playing 🚀</a></li>
+      <li><button class="theme-toggle-btn theme-toggle" title="Toggle theme" aria-label="Toggle color theme">🌓</button></li>
+    </ul>
+  </nav>
+
+  <main class="page-container">
+    <header class="page-header">
+      <h1>📖 Developer Setup & Architecture</h1>
+      <p>Explore the architecture, security guarantees, and API specifications for Quizphoria.</p>
+    </header>
+
+    <div class="quiz-wrapper" style="max-width: 900px; text-align: left;">
+      <h2 style="font-family: 'Fredoka', sans-serif; color: var(--primary-purple); margin-bottom: 0.8rem;">1. Running the Go Backend</h2>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">The backend is a zero-external-dependency HTTP service built with Go standard library:</p>
+      <pre style="background: #0f172a; color: #38bdf8; padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem; font-size: 1rem; overflow-x: auto;"><code>go run main.go
+# Server listens on http://localhost:8080 (or $PORT)</code></pre>
+
+      <h2 style="font-family: 'Fredoka', sans-serif; color: var(--primary-purple); margin-bottom: 0.8rem;">2. API Contracts & Security Guarantees</h2>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0.5rem;">
+        <strong>Data Protection:</strong> The public <code>/api/questions</code> endpoint strips answer keys and explanations to enforce server-side integrity.
+      </p>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+        <strong>Public Question Contract:</strong>
+      </p>
+      <pre style="background: #0f172a; color: #a7f3d0; padding: 1.2rem; border-radius: 12px; font-size: 0.95rem; margin-bottom: 2rem; overflow-x: auto;"><code>[
+  {
+    "id": 1,
+    "category": "Science",
+    "question": "Which planet in our solar system has the most confirmed moons?",
+    "options": ["Saturn", "Jupiter", "Uranus", "Neptune"],
+    "hint": "It is famous for its bright, prominent ring system."
+  }
+]</code></pre>
+
+      <h2 style="font-family: 'Fredoka', sans-serif; color: var(--primary-purple); margin-bottom: 0.8rem;">3. Interactive API Tester</h2>
+      
+      <div class="api-box" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 0.5rem;">GET /api/questions</h3>
+        <p style="color:var(--text-muted); font-size: 0.95rem; margin-bottom: 0.8rem;">Retrieve sanitized questions filtered by category.</p>
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+          <input id="api-category" placeholder="Category (e.g. Science, Math, or All)" style="flex: 1; min-width: 200px;" value="All" />
+          <button id="btn-fetch" class="btn btn-pink">Fetch Questions</button>
+        </div>
+        <pre id="api-questions" style="margin-top: 1rem; max-height: 250px; overflow: auto; background: #0b1020; color: #c7f9e3; padding: 1rem; border-radius: 8px; font-size: 0.9rem;"></pre>
+      </div>
+
+      <div class="api-box">
+        <h3 style="margin-bottom: 0.5rem;">POST /api/submit</h3>
+        <p style="color:var(--text-muted); font-size: 0.95rem; margin-bottom: 0.8rem;">Submit structured responses for server-side evaluation and leaderboard recording.</p>
+        <textarea id="api-payload" style="width: 100%; height: 140px; font-family: monospace; font-size: 0.9rem;">{
+  "playerName": "Curious Learner",
+  "category": "Science",
+  "responses": [
+    { "questionId": 1, "answer": "Saturn" }
+  ]
+}</textarea>
+        <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem;">
+          <button id="btn-submit-api" class="btn btn-purple">Submit Answers</button>
+          <button id="btn-clear" class="btn" style="background: var(--surface-muted); color: var(--text-main);">Clear Output</button>
+        </div>
+        <pre id="api-response" style="margin-top: 1rem; max-height: 260px; overflow: auto; background: #0b1020; color: #fef3c7; padding: 1rem; border-radius: 8px; font-size: 0.9rem;"></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
+  </footer>
+
+  <script src="ui.js"></script>
+  <script>
+    // Documentation interactive behavior
+    const btnFetch = document.getElementById('btn-fetch');
+    if (btnFetch) {
+      btnFetch.addEventListener('click', async () => {
+        const cat = document.getElementById('api-category').value.trim() || 'All';
+        const display = document.getElementById('api-questions');
+        display.textContent = 'Loading...';
+        try {
+          const res = await fetch('/api/questions?category=' + encodeURIComponent(cat));
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          display.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          display.textContent = 'Error: ' + e.message;
+        }
+      });
+    }
+
+    const btnSubmit = document.getElementById('btn-submit-api');
+    if (btnSubmit) {
+      btnSubmit.addEventListener('click', async () => {
+        const raw = document.getElementById('api-payload').value;
+        const display = document.getElementById('api-response');
+        display.textContent = 'Submitting...';
+        try {
+          const payload = JSON.parse(raw);
+          const res = await fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          display.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          display.textContent = 'Error: ' + e.message;
+        }
+      });
+    }
+
+    const btnClear = document.getElementById('btn-clear');
+    if (btnClear) {
+      btnClear.addEventListener('click', () => {
+        document.getElementById('api-response').textContent = '';
+      });
+    }
+  </script>
+</body>
+</html>
