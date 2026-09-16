@@ -41,7 +41,7 @@
     }));
     // inject bg shapes once
     if (!document.querySelector('.bg-shapes')){
-      const bg = document.createElement('div'); bg.className='bg-shapes'; bg.innerHTML='<div class="shape s1"></div><div class="shape s2"></div><div class="shape s3"></div>';
+      const bg = document.createElement('div'); bg.className='bg-shapes'; bg.innerHTML='<div class="shape s1"></div><div class="shape s2"></div><div class="shape s3"></div><div class="shape s4"></div>';
       document.body.appendChild(bg);
     }
   }
