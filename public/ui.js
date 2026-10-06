@@ -1,7 +1,10 @@
 // UI helpers: theme toggle, result image, mascot interaction
 (function(){
   const stored = localStorage.getItem('quizphoria-theme');
-  if (stored === 'dark') document.body.classList.add('dark');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (stored === 'dark' || (!stored && prefersDark)) {
+    document.body.classList.add('dark');
+  }
 
   function toggleTheme() {
     document.body.classList.toggle('dark');

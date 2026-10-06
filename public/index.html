@@ -1,46 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quizphoria | Supercharging Student Learning</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quizphoria – Smart quizzes for Kenya's young learners</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#15305f;--navy2:#0c1f3f;--green:#43a047;--green2:#2e7d52;--sun:#ffc83d;--red:#e5484d;--sky:#3b8be8;--ink:#1b2a3d;--mute:#5b6b7f;--bg:#f5f8fb;--hero:linear-gradient(135deg,#2a5fa8,#2e8a5f)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+h1,h2,h3,.logo{font-family:Fredoka,system-ui,sans-serif;line-height:1.1;margin:0}
+button{font:inherit;cursor:pointer}a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+.topbar{background:var(--navy);color:#dbe6f7;font-size:.85rem;padding:8px 0}.topbar .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #0001}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-size:1.5rem;font-weight:700}
+.logo i{font-style:normal;display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--navy);color:var(--sun);font-size:1.3rem}
+.logo small{display:block;font:600 .62rem Inter;letter-spacing:.14em;color:var(--green);margin-top:2px}
+nav{display:flex;align-items:center;gap:6px}
+nav a{padding:8px 14px;font-weight:600;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--navy);border-bottom:3px solid transparent}
+nav a.on{border-color:var(--green)}nav a:hover{color:var(--green2)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;padding:14px 26px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.9rem;text-decoration:none;border-radius:4px}
+.g{background:linear-gradient(90deg,var(--green2),var(--green));color:#fff}.w{border-color:#fff;color:#fff}.n{border-color:var(--navy);color:var(--navy)}
+nav .btn{padding:10px 18px;margin-left:4px}nav .btn.g{color:#fff;border-bottom:2px solid transparent}
+.menu{display:none;background:none;border:2px solid var(--navy);border-radius:6px;padding:6px 12px;color:var(--navy);font-weight:600}
+.page{display:none}.page.on{display:block}
+/* hero */
+.hero{min-height:72vh;display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,#0b1f3ae6 30%,#0b1f3a80),var(--hero);background-size:cover;background-position:center}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:60px;padding-bottom:60px}
+.kick{color:#7ddc82;font-weight:600;letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(2.5rem,6.5vw,4.6rem);font-weight:700}.hero h1 b{color:#6fd674}
+.hero p{font-size:1.15rem;max-width:46ch;margin:20px 0 30px;color:#e5edf8}.hero .btn+.btn{margin-left:10px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;transform:rotate(4deg)}
+.tiles span{aspect-ratio:1;display:grid;place-items:center;border-radius:20px;font:700 clamp(1.8rem,4vw,3rem) Fredoka;color:#fff;box-shadow:0 10px 24px #0005}
+.tiles span:nth-child(1){background:var(--red)}.tiles span:nth-child(2){background:var(--sun);color:var(--navy)}.tiles span:nth-child(3){background:var(--sky)}
+.tiles span:nth-child(4){background:var(--green)}.tiles span:nth-child(5){background:#fff;color:var(--navy)}.tiles span:nth-child(6){background:#b86f0f}
+/* sections */
+section.s{padding:72px 0}.alt{background:var(--bg)}
+.head{max-width:620px;margin-bottom:36px}.head h2{font-size:clamp(1.9rem,4vw,2.7rem);color:var(--navy)}.head p{color:var(--mute);margin:10px 0 0}
+.eyebrow{color:var(--green);font-weight:600;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.sub{border:0;text-align:left;border-radius:10px;padding:26px;color:#fff;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;font-family:inherit}
+.sub .e{font-size:2.6rem}.sub h3{font-size:1.3rem}.sub p{margin:4px 0 0;font-size:.92rem;opacity:.95}.sub:hover{transform:translateY(-4px)}
+.c1{background:var(--sky)}.c2{background:var(--red)}.c3{background:var(--green2)}.c4{background:#b86f0f}
+.card{background:#fff;border:1px solid #e1e8f0;border-top:5px solid var(--green);padding:26px;border-radius:6px}
+.card:nth-child(3n+2){border-top-color:var(--sky)}.card:nth-child(3n){border-top-color:var(--sun)}
+.card h3{color:var(--navy);font-size:1.25rem;margin-bottom:6px}.card p{margin:0;color:var(--mute)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;counter-reset:s}
+.step{counter-increment:s;padding-left:64px;position:relative}
+.step:before{content:counter(s);position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 1.4rem Fredoka}
+.step h3{color:var(--navy);font-size:1.2rem}.step p{margin:4px 0 0;color:var(--mute)}
+.cta{background:var(--navy);color:#fff;text-align:center;padding:64px 24px}.cta h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:20px}
+/* demo */
+.pgrades{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 20px}
+.grade{width:96px;height:96px;border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;font-weight:600;line-height:1}
+.grade b{display:block;font:700 2.4rem Fredoka}.grade span{font-size:.8rem}.grade[aria-pressed=true]{background:var(--navy);color:#fff}
+#hint{font-weight:600;color:var(--navy);min-height:1.6em;margin:0 0 14px}
+.pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.pick .sub{min-height:76px;flex-direction:row;align-items:center;gap:12px;padding:14px 18px}.pick .sub .e{font-size:1.8rem}.pick h3{font-size:1.05rem}
+#quiz{display:none;background:#fff;border:2px solid var(--navy);border-radius:14px;padding:28px;margin-top:28px;box-shadow:8px 8px 0 var(--navy)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}.bar{flex:1;height:12px;background:#e1e8f0;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.back{background:none;border:2px solid var(--navy);color:var(--navy);border-radius:8px;padding:4px 12px}
+#q{font:600 clamp(1.4rem,4vw,2rem) Fredoka;margin:12px 0 20px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.opt{padding:16px;border-radius:10px;border:2px solid var(--navy);background:#fff;color:var(--navy);font-weight:600;font-size:1.15rem}
+.opt:hover:not(:disabled){background:var(--sun)}.opt.good{background:var(--green);color:#fff;border-color:var(--green)}.opt.bad{background:var(--red);color:#fff;border-color:var(--red)}
+#fb{min-height:2em;font-weight:600;margin:14px 0 8px}
+.next{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px 26px;font-weight:600;display:none}
+#end{text-align:center;display:none}#end .stars{font-size:2.6rem}
+footer{background:var(--navy2);color:#b9c8df;padding:36px 0;font-size:.92rem}footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}footer b{color:#fff}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.tiles{max-width:340px;transform:none}.menu{display:block}
+ nav{display:none;position:absolute;left:0;right:0;top:74px;background:#fff;flex-direction:column;align-items:stretch;padding:12px 24px 20px;box-shadow:0 10px 20px #0002}nav.open{display:flex}.hero .btn+.btn{margin:10px 0 0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-
-  <nav class="navbar">
-    <a href="index.html" class="logo"><span class="mascot">🎯</span> Quizphoria!</a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="features.html">Features</a></li>
-      <li><a href="demo.html">Interactive Demo</a></li>
-      <li><a href="docs.html">Documentation</a></li>
-      <li><a href="demo.html" class="btn-nav">Start Playing 🚀</a></li>
-      <li><button class="theme-toggle-btn theme-toggle" title="Toggle theme">🌓</button></li>
-    </ul>
+<div class="topbar"><div class="wrap"><span>✉ sharleatieno@gmail.com</span><span>Quizzes for CBC Grades 1 to 3 · Free to play</span></div></div>
+<header><div class="wrap">
+  <a class="logo" href="#home"><i>Q</i><div>Quizphoria<small>LEARN · PLAY · SHINE</small></div></a>
+  <button class="menu" id="menu" aria-label="Open menu">Menu</button>
+  <nav id="nav">
+    <a href="#home" data-p="home">Home</a><a href="#features" data-p="features">Features</a><a href="#demo" data-p="demo">Demo</a><a href="#parents" data-p="parents">For Parents</a>
+    <a class="btn g" href="#demo">Play now</a>
   </nav>
+</div></header>
 
-  <header class="hero">
-    <div class="hero-card">
-      <div class="hero-mascot-wrapper">
-        <img src="images/hero_mascot.jpg" alt="Quizphoria Robot Mascot" class="hero-mascot-img">
-      </div>
-      <span class="hero-badge">🎓 Fun Educational Hub for Students</span>
-      <h1>Welcome to <span class="sparkle">Quizphoria World!</span></h1>
-      <p>Discover exciting interactive quizzes across Computer Science, Mathematics, and Science. Built with high-speed execution and real-time score tracking!</p>
-      
-      <div class="btn-group">
-        <a href="demo.html" class="btn btn-pink">🎮 Try Interactive Demo</a>
-        <a href="features.html" class="btn btn-yellow">🚀 Explore Features</a>
-        <a href="docs.html" class="btn btn-purple">📖 View Setup Guide</a>
-      </div>
+<!-- HOME -->
+<main class="page" id="home">
+  <div class="hero"><div class="wrap">
+    <div>
+      <div class="kick">Kenya's quiz playground</div>
+      <h1>Smart quizzes for Kenya's <b>youngest learners</b></h1>
+      <p>Friendly, CBC-aligned quizzes for Grades 1 to 3 in Mathematics, English, Kiswahili and Environmental Activities. Tap, learn and collect stars.</p>
+      <a class="btn g" href="#demo">Try the demo →</a><a class="btn w" href="#features">Explore features</a>
     </div>
-  </header>
+    <div class="tiles" aria-hidden="true"><span>A</span><span>2+3</span><span>B</span><span>🌳</span><span>Pili</span><span>⭐</span></div>
+  </div></div>
 
-  <footer class="footer">
-    <p>&copy; 2026 Quizphoria. Created by <strong>Sharleen Atieno</strong></p>
-  </footer>
+  <section class="s"><div class="wrap">
+    <div class="head"><div class="eyebrow">Learning areas</div><h2>Four subjects, one friendly place</h2><p>Tap a subject to jump straight into a quiz.</p></div>
+    <div class="grid" id="homeAreas"></div>
+  </div></section>
 
-  <script src="ui.js"></script>
+  <section class="s alt"><div class="wrap">
+    <div class="head"><div class="eyebrow">How it works</div><h2>Three taps and learning begins</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Pick a grade</h3><p>Grade 1, 2 or 3. Questions match each level.</p></div>
+      <div class="step"><h3>Choose a subject</h3><p>Maths, English, Kiswahili or Environmental Activities.</p></div>
+      <div class="step"><h3>Collect stars</h3><p>Instant feedback on every answer and stars at the end.</p></div>
+    </div>
+  </div></section>
+  <div class="cta"><h2>Ready for a quick quiz?</h2><a class="btn g" href="#demo">Start the demo →</a></div>
+</main>
+
+<!-- FEATURES -->
+<main class="page" id="features">
+  <section class="s"><div class="wrap">
+    <div class="head"><div class="eyebrow">Features</div><h2>Built for small learners and busy teachers</h2><p>Everything is designed to be quick, clear and encouraging.</p></div>
+    <div class="grid">
+      <div class="card"><h3>CBC-aligned content</h3><p>Questions are grouped by grade and learning area for Lower Primary.</p></div>
+      <div class="card"><h3>Instant feedback</h3><p>The right answer shows in green straight away so children learn from every question.</p></div>
+      <div class="card"><h3>Stars and rewards</h3><p>A star for every correct answer keeps young learners motivated.</p></div>
+      <div class="card"><h3>Grade levels</h3><p>Grade 1, 2 and 3 each get their own questions, from counting to multiplying.</p></div>
+      <div class="card"><h3>Phone friendly</h3><p>Big buttons and a layout that works on phones, tablets and computers.</p></div>
+      <div class="card"><h3>No sign-up</h3><p>Open the page and play. No accounts, no ads and no personal details.</p></div>
+    </div>
+  </div></section>
+  <div class="cta"><h2>See it in action</h2><a class="btn g" href="#demo">Try the demo →</a></div>
+</main>
+
+<!-- DEMO -->
+<main class="page" id="demo">
+  <section class="s"><div class="wrap">
+    <div class="head"><div class="eyebrow">Interactive demo</div><h2>Choose your grade and subject</h2><p>Pick a grade first, then a subject to begin.</p></div>
+    <div class="pgrades" id="gradeBtns"></div>
+    <p id="hint"></p>
+    <div class="pick grid" id="areaBtns"></div>
+    <div id="quiz" aria-live="polite">
+      <div class="top"><button class="back" id="back">Close</button><div class="bar"><i id="prog"></i></div><span id="count"></span></div>
+      <div id="playbox"><div id="q"></div><div class="opts" id="opts"></div><div id="fb"></div><button class="next" id="next">Next question</button></div>
+      <div id="end"><div class="stars" id="stars"></div><h2 id="msg"></h2><p id="sc"></p><button class="next" style="display:inline-block" id="again">Play again</button></div>
+    </div>
+  </div></section>
+</main>
+
+<!-- PARENTS -->
+<main class="page" id="parents">
+  <section class="s"><div class="wrap">
+    <div class="head"><div class="eyebrow">For parents and teachers</div><h2>A safe place to practise</h2><p>Quizphoria supports learning at home and in class with short, focused quizzes.</p></div>
+    <div class="grid">
+      <div class="card"><h3>Grade 1</h3><p>Counting and adding small numbers, letter sounds, greetings in Kiswahili, pets, water and the sun.</p></div>
+      <div class="card"><h3>Grade 2</h3><p>Adding and taking away, short sentences and opposites, days of the week and plants and animals.</p></div>
+      <div class="card"><h3>Grade 3</h3><p>Multiplying and halves, past tense and plurals, everyday Kiswahili words, water sources and soil care.</p></div>
+    </div>
+  </div></section>
+  <section class="s alt"><div class="wrap"><div class="head" style="margin:0"><div class="eyebrow">Get in touch</div><h2>Questions or feedback?</h2><p>Email sharleatieno@gmail.com. Teachers are welcome to suggest new questions.</p></div></div></section>
+</main>
+
+<footer><div class="wrap"><div><b>Quizphoria</b><br>Fun CBC quizzes for Grades 1 to 3</div><div>© 2026 Quizphoria · Created by Sharleen Atieno</div></div></footer>
+
+<script>
+const AREAS=[
+ {id:'math',name:'Mathematics',emoji:'🔢',cls:'c1',sub:'Count, add, take away and share.'},
+ {id:'eng',name:'English',emoji:'📖',cls:'c2',sub:'Letters, words and simple sentences.'},
+ {id:'kis',name:'Kiswahili',emoji:'🗣️',cls:'c3',sub:'Lugha, maneno na salamu.'},
+ {id:'env',name:'Environmental Activities',emoji:'🌳',cls:'c4',sub:'Plants, animals, water and health.'}
+];
+// [grade, question, options, index of correct option]
+const Q={
+ math:[[1,'🍎🍎🍎 + 🍎🍎 = ?',['4','5','6'],1],[1,'Which number is bigger: 7 or 4?',['7','4','Same'],0],[1,'What number comes after 9?',['8','10','11'],1],
+  [2,'12 + 7 = ?',['18','19','20'],1],[2,'25 − 10 = ?',['15','35','14'],0],[2,'Count in 2s: 2, 4, 6, __',['7','8','9'],1],
+  [3,'6 × 3 = ?',['12','18','21'],1],[3,'100 − 40 = ?',['60','50','70'],0],[3,'Half of 20 is?',['5','15','10'],2]],
+ eng:[[1,'Which word starts with the letter b?',['ball','cat','sun'],0],[1,'I ___ a boy.',['is','am','are'],1],[1,'One cat, two ___',['cat','cats','cates'],1],
+  [2,'She ___ to school.',['go','goes','going'],1],[2,'The opposite of big is?',['small','tall','long'],0],[2,'Which one is a place?',['run','blue','market'],2],
+  [3,'Yesterday I ___ to the shop.',['walk','walked','walking'],1],[3,'Which word is a noun?',['table','run','quickly'],0],[3,'The plural of child is?',['childs','children','childes'],1]],
+ kis:[[1,'Hujambo? Jibu ni:',['Sijambo','Kesho','Maji'],0],[1,'Jani lina rangi gani?',['Nyekundu','Kijani','Nyeusi'],1],[1,'Baba na mama ni:',['Wazazi','Walimu','Wageni'],0],
+  [2,'Moja, mbili, ___',['nne','tatu','sita'],1],[2,'Siku baada ya Jumatatu ni:',['Jumanne','Jumapili','Ijumaa'],0],[2,'Wingi wa kitabu ni:',['kitabu','vitabu','mitabu'],1],
+  [3,'Wingi wa mtoto ni:',['mtoto','vitoto','watoto'],2],[3,'Kinyume cha kubwa ni:',['ndogo','refu','pana'],0],[3,'Chakula kinachotengenezwa kwa unga wa mahindi:',['Ugali','Chai','Embe'],0]],
+ env:[[1,'What gives us light in the day?',['Moon','Sun','Stars'],1],[1,'Which one is a pet?',['Lion','Dog','Elephant'],1],[1,'We drink clean ___',['water','soil','sand'],0],
+  [2,'Plants need water and ___ to grow.',['sunlight','plastic','salt'],0],[2,'Which is a domestic animal?',['Cow','Zebra','Giraffe'],0],[2,'Before eating we wash our hands with soap and ___',['sand','water','oil'],1],
+  [3,'Which is a source of water?',['River','Road','Roof tile'],0],[3,'Where do fish live?',['In water','In trees','Underground'],0],[3,'Cutting trees without planting new ones causes:',['Soil erosion','More rain','Clean air'],0]]
+};
+const $=id=>document.getElementById(id);
+let grade=null,pending=null,items=[],i=0,score=0;
+
+/* simple page router: #home #features #demo #parents */
+function route(){
+  const p=(location.hash||'#home').slice(1);const page=$(p)?p:'home';
+  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id===page));
+  document.querySelectorAll('nav a[data-p]').forEach(a=>a.classList.toggle('on',a.dataset.p===page));
+  $('nav').classList.remove('open');window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
+$('menu').onclick=()=>$('nav').classList.toggle('open');
+
+function areaBtn(a,parent,showSub,cb){
+  const b=document.createElement('button');b.className='sub '+a.cls;
+  b.innerHTML=`<span class="e">${a.emoji}</span><div><h3>${a.name}</h3>${showSub?`<p>${a.sub}</p>`:''}</div>`;
+  b.onclick=()=>cb(a);parent.append(b);
+}
+AREAS.forEach(a=>areaBtn(a,$('homeAreas'),true,a=>{pending=a;
+  $('hint').textContent=`${a.name} chosen. Now tap your grade.`;location.hash='demo'}));
+AREAS.forEach(a=>areaBtn(a,$('areaBtns'),false,a=>{pending=a;
+  if(grade)start(a);else $('hint').textContent='First tap your grade above 👆'}));
+[1,2,3].forEach(g=>{
+  const b=document.createElement('button');b.className='grade';b.setAttribute('aria-pressed','false');
+  b.innerHTML=`<span>Grade</span><b>${g}</b>`;
+  b.onclick=()=>{grade=g;document.querySelectorAll('.grade').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    if(pending)start(pending);else{$('hint').textContent=`Grade ${g}: now choose a subject.`;stop()}};
+  $('gradeBtns').append(b);
+});
+function stop(){$('quiz').style.display='none'}
+function start(a){
+  items=Q[a.id].filter(q=>q[0]===grade);i=0;score=0;$('hint').textContent=`${a.name} · Grade ${grade}`;
+  $('end').style.display='none';$('playbox').style.display='block';$('quiz').style.display='block';
+  $('back').onclick=stop;$('again').onclick=()=>start(a);show();$('quiz').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function show(){
+  const [,q,o]=items[i];$('q').textContent=q;$('fb').textContent='';$('next').style.display='none';
+  $('count').textContent=`${i+1}/${items.length}`;$('prog').style.width=(i/items.length*100)+'%';$('opts').innerHTML='';
+  o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>pick(k);$('opts').append(b)});
+}
+function pick(k){
+  const c=items[i][3],bs=[...document.querySelectorAll('.opt')];
+  bs.forEach(b=>b.disabled=true);bs[c].classList.add('good');
+  if(k===c){score++;$('fb').textContent='⭐ Correct! Well done!'}else{bs[k].classList.add('bad');$('fb').textContent='Not this time. The green answer is correct.'}
+  $('next').style.display='inline-block';$('next').textContent=i===items.length-1?'See my stars':'Next question';
+  $('next').onclick=()=>{i++;i<items.length?show():finish()};$('next').focus();
+}
+function finish(){
+  $('prog').style.width='100%';$('playbox').style.display='none';$('end').style.display='block';
+  $('stars').textContent='⭐'.repeat(score)+'☆'.repeat(items.length-score);
+  $('msg').textContent=score===items.length?'Super job!':score>0?'Good try!':'Keep practising!';
+  $('sc').textContent=`You got ${score} out of ${items.length}.`;
+}
+</script>
 </body>
 </html>
